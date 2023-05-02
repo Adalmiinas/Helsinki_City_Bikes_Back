@@ -1,0 +1,8 @@
+﻿data
+.env
+.vscode
+.vs
+obj
+bin
+appsettings.json
+secrets.json
