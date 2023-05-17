@@ -6,9 +6,10 @@ namespace HelsinkiBikes.DataContext
 {
     public class DataContexts : DbContext
     {
-      
-        public DbSet<Trip> Trips{ get; set; }
-            
+
+        public DbSet<Trip> Trips { get; set; }
+        public DbSet<Station> Stations { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -17,7 +18,7 @@ namespace HelsinkiBikes.DataContext
         }
 
 
-        }
-   
+    }
+
 }
 

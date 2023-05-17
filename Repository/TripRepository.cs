@@ -2,22 +2,67 @@
 using AutoMapper;
 using HelsinkiBikes.Model;
 using HelsinkiBikes.Repository;
+using Microsoft.Data.SqlClient;
 
 namespace HelsinkiBikes.Repository
 {
-	public class TripRepository : ITripRepository
-	{
-  
-        private readonly IMapper _mapper;
+    public class TripRepository : ITripRepository
+    {
 
-        public TripRepository(IMapper mapper)
+        public IEnumerable<TripReadDTO> GetOnePageOfTrips(int page)
         {
-            _mapper = mapper;
+            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            {
+                conn.Open();
+                var sql = "SELECT * FROM Trips ORDER BY id OFFSET @start ROWS FETCH NEXT 100 ROWS ONLY;";
+                using var command = new SqlCommand(sql, conn);
+                int startingpoint = (page - 1) * 10;
+                command.Parameters.AddWithValue("@start", startingpoint);
+                using SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    yield return new TripReadDTO(
+                        reader.GetInt32(0),
+                        reader.GetDateTime(1),
+                        reader.GetDateTime(2),
+                        reader.GetInt32(3),
+                        reader.GetString(4),
+                        reader.GetInt32(5),
+                        reader.GetString(6),
+                        reader.GetInt32(7),
+                        reader.GetInt32(8)
+                        );
+                }
+            }
         }
 
-        public Task<IEnumerable<Trip>> GetAllTrips()
+        public IEnumerable<TripReadDTO> GetAllTrips()
         {
-            return null;
+            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            {
+                conn.Open();
+                var sql = "SELECT * FROM Trips;";
+                using var command = new SqlCommand(sql, conn);
+
+
+                using SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    yield return new TripReadDTO(
+                        reader.GetInt32(0),
+                        reader.GetDateTime(1),
+                        reader.GetDateTime(2),
+                        reader.GetInt32(3),
+                        reader.GetString(4),
+                        reader.GetInt32(5),
+                        reader.GetString(6),
+                        reader.GetInt32(7),
+                        reader.GetInt32(8)
+                        );
+                }
+            }
         }
     }
 }

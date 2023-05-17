@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelsinkiBikes.Migrations
 {
     [DbContext(typeof(DataContexts))]
-    [Migration("20230507110532_initial")]
+    [Migration("20230517130552_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,6 +23,58 @@ namespace HelsinkiBikes.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("HelsinkiBikes.Model.Station", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<int?>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("EnglishName")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("Operator")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<int>("StationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SwedishAddress")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("SwedishCityName")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("SwedishName")
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("xAxel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("yAxel")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("Stations");
+                });
 
             modelBuilder.Entity("HelsinkiBikes.Model.Trip", b =>
                 {
@@ -51,7 +103,7 @@ namespace HelsinkiBikes.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("ReturnStationName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(40)");
 
                     b.Property<DateTime?>("ReturnTime")
                         .HasColumnType("datetime2");

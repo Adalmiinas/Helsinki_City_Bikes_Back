@@ -16,13 +16,14 @@ namespace HelsinkiBikes.Model
         public int? DepartureStationId { get; set; }
 
         [Column(TypeName = "nvarchar(40)")]
-        public String? DepartureStationName { get; set; }
+        public string? DepartureStationName { get; set; }
 
         public int? ReturnStationId { get; set; }
 
+        [Column(TypeName = "nvarchar(40)")]
         public string? ReturnStationName { get; set; }
 
-        public int? Distance { get; set; }
+        public float? Distance { get; set; }
 
         public int? Duration { get; set; }
     }
