@@ -23,6 +23,7 @@ namespace HelsinkiBikes
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddScoped<ITripRepository, TripRepository>();
+            builder.Services.AddScoped<IStationRepository, StationRepository>();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddAutoMapper(typeof(AppDomain));
 

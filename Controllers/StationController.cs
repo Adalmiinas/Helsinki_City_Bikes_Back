@@ -12,9 +12,9 @@ namespace HelsinkiBikes.Controllers
         private readonly IStationRepository _stationRepository;
         private readonly IMapper _mapper;
 
-        public StationController(IStationRepository stationRepository, IMapper mapper)
+        public StationController(IStationRepository stationrepository, IMapper mapper)
         {
-            _stationRepository = stationRepository;
+            _stationRepository = stationrepository;
             _mapper = mapper;
         }
 
@@ -26,6 +26,22 @@ namespace HelsinkiBikes.Controllers
             try
             {
                 return Ok(_mapper.Map<List<StationReadDTO>>(_stationRepository.GetAllStations()));
+            }
+            catch (System.Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+
+        }
+
+        [HttpGet("GetStationById")]
+        [ProducesResponseType(typeof(List<StationReadDTO>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public ActionResult<List<StationReadDTO>> GetStationsById(int id)
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<StationReadDTO>>(_stationRepository.GetStationById(id)));
             }
             catch (System.Exception ex)
             {
