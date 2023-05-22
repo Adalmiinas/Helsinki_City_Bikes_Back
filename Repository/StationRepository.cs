@@ -4,14 +4,17 @@ using Microsoft.Data.SqlClient;
 using System;
 using AutoMapper;
 using HelsinkiBikes.Repository;
+using System.Configuration;
 
 namespace HelsinkiBikes.Repository
 {
     public class StationRepository : IStationRepository
     {
+        public string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["helsinkiBikes"].ConnectionString;
+
         public IEnumerable<StationReadDTO> GetAllStations()
         {
-            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 var sql = "SELECT * FROM Stations;";
@@ -41,7 +44,7 @@ namespace HelsinkiBikes.Repository
 
         public IEnumerable<StationReadDTO> GetStationById(int id)
         {
-            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 var sql = "SELECT * FROM Stations WHERE stationId = @id;";
@@ -72,7 +75,7 @@ namespace HelsinkiBikes.Repository
 
         public IEnumerable<StationCountDTO> GetDeparturesFromStation(int id)
         {
-            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 var sql = "SELECT count(*) FROM Trips WHERE DepartureStationId = @id;";
@@ -90,7 +93,7 @@ namespace HelsinkiBikes.Repository
         }
         public IEnumerable<StationCountDTO> GetReturnsForStation(int id)
         {
-            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 var sql = "SELECT count(*) FROM Trips WHERE ReturnStationId = @id;";

@@ -10,7 +10,7 @@ namespace HelsinkiBikes.Import
 {
     public class ImportTrips
     {
-        public string ConnectionString { get; set; } = string.Empty;
+        public string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["helsinkiBikes"].ConnectionString;
 
         public CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
@@ -22,7 +22,7 @@ namespace HelsinkiBikes.Import
         public void seeding(string data)
         {
 
-            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 using (StreamReader reader = new StreamReader(data))

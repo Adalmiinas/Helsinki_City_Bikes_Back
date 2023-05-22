@@ -22,6 +22,7 @@
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="NuGet.PackageManagement" Version="6.5.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +31,6 @@
     <None Remove="Model\" />
     <None Remove="Repository\" />
     <None Remove="DataContext\" />
-    <None Remove="Extensions\" />
     <None Remove="Model\StationCount.js" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +39,5 @@
     <Folder Include="Model\" />
     <Folder Include="Repository\" />
     <Folder Include="DataContext\" />
-    <Folder Include="Extensions\" />
   </ItemGroup>
 </Project>

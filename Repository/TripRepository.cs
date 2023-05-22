@@ -8,10 +8,11 @@ namespace HelsinkiBikes.Repository
 {
     public class TripRepository : ITripRepository
     {
+        public string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["helsinkiBikes"].ConnectionString;
 
         public IEnumerable<TripReadDTO> GetOnePageOfTrips(int page)
         {
-            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 var sql = "SELECT * FROM Trips ORDER BY id OFFSET @start ROWS FETCH NEXT 100 ROWS ONLY;";
@@ -39,7 +40,7 @@ namespace HelsinkiBikes.Repository
 
         public IEnumerable<TripReadDTO> GetAllTrips()
         {
-            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
                 var sql = "SELECT * FROM Trips;";

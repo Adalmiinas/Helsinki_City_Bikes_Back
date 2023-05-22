@@ -61,38 +61,16 @@ namespace HelsinkiBikes
             app.Run();
 
 
-            var importTrips = new ImportTrips() { ConnectionString = GetConnectionString() };
+            var importTrips = new ImportTrips();
 
             //importTrips.seeding("data/2021-05.csv");
             //importTrips.seeding("data/2021-06.csv");
             //importTrips.seeding("data/2021-07.csv");
 
-            var importStations = new ImportStations() { ConnectionString = GetConnectionString() };
+            var importStations = new ImportStations();
 
             //importStations.seeding("data/Helsingin_ja_Espoon_kaupunkipy%C3%B6r%C3%A4asemat_avoin.csv");
 
-            var tripRepository = new TripRepository();
-            var trips = tripRepository.GetOnePageOfTrips(1);
-
-            foreach (var trip in trips)
-            {
-                Console.Write(trip.id + ": \t ");
-                Console.Write(trip.DepartureStationName + "\t");
-                Console.Write(trip.ReturnStationName + "\t");
-
-            }
-
-            static string GetConnectionString()
-            {
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                builder.DataSource = "localhost";
-                builder.UserID = "SA";
-                builder.Password = "Password123";
-                builder.InitialCatalog = "HelsinkiBikes";
-                builder.IntegratedSecurity = false;
-
-                return builder.ConnectionString;
-            }
         }
     }
 }
