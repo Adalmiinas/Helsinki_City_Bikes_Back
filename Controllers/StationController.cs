@@ -49,6 +49,40 @@ namespace HelsinkiBikes.Controllers
             }
 
         }
+
+
+        [HttpGet("GetDeparturesFromStation")]
+        [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public ActionResult<List<StationCountDTO>> GetDeparturesFromStation(int id)
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<StationCountDTO>>(_stationRepository.GetDeparturesFromStation(id)));
+            }
+            catch (System.Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+
+        }
+
+
+        [HttpGet("GetReturnsForStation")]
+        [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public ActionResult<List<StationCountDTO>> GetReturnsForStation(int id)
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<StationCountDTO>>(_stationRepository.GetReturnsForStation(id)));
+            }
+            catch (System.Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+
+        }
     }
 }
 

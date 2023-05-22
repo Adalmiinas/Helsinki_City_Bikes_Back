@@ -31,6 +31,7 @@
     <None Remove="Repository\" />
     <None Remove="DataContext\" />
     <None Remove="Extensions\" />
+    <None Remove="Model\StationCount.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />

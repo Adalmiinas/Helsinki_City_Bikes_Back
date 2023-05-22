@@ -69,6 +69,43 @@ namespace HelsinkiBikes.Repository
                 }
             }
         }
+
+        public IEnumerable<StationCountDTO> GetDeparturesFromStation(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            {
+                conn.Open();
+                var sql = "SELECT count(*) FROM Trips WHERE DepartureStationId = @id;";
+                using var command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@id", id);
+                using SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    yield return new StationCountDTO(
+                        reader.GetInt32(0)
+                        );
+                }
+            }
+        }
+        public IEnumerable<StationCountDTO> GetReturnsForStation(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(@"Data source= localhost; User id=SA; Password=Password123;Initial Catalog = HelsinkiBikes;"))
+            {
+                conn.Open();
+                var sql = "SELECT count(*) FROM Trips WHERE ReturnStationId = @id;";
+                using var command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@id", id);
+                using SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    yield return new StationCountDTO(
+                        reader.GetInt32(0)
+                        );
+                }
+            }
+        }
     }
 }
 
