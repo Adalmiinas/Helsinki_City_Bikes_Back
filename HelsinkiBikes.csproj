@@ -40,4 +40,11 @@
     <Folder Include="Repository\" />
     <Folder Include="DataContext\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Model\TripCountDTO.cs">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Compile>
+  </ItemGroup>
 </Project>

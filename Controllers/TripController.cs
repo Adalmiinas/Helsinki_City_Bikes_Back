@@ -48,6 +48,22 @@ namespace HelsinkiBikes.Controllers
             }
 
         }
+
+        [HttpGet("Trip/GetCountOfTrips")]
+        [ProducesResponseType(typeof(List<TripCountDTO>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public ActionResult<List<TripCountDTO>> GetCountOfTrips()
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<TripCountDTO>>(_tripRepository.GetCountOfTrips()));
+            }
+            catch (System.Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+
+        }
     }
 }
 

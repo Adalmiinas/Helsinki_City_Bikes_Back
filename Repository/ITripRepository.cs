@@ -7,6 +7,7 @@ namespace HelsinkiBikes.Repository
     {
         IEnumerable<TripReadDTO> GetOnePageOfTrips(int page);
         IEnumerable<TripReadDTO> GetAllTrips();
+        IEnumerable<TripCountDTO> GetCountOfTrips();
     }
 }
 

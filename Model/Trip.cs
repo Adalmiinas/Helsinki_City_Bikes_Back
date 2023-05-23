@@ -23,7 +23,7 @@ namespace HelsinkiBikes.Model
         [Column(TypeName = "nvarchar(40)")]
         public string? ReturnStationName { get; set; }
 
-        public float? Distance { get; set; }
+        public int? Distance { get; set; }
 
         public int? Duration { get; set; }
     }

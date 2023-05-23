@@ -9,6 +9,8 @@ namespace HelsinkiBikes.Repository
         IEnumerable<StationReadDTO> GetStationById(int id);
         IEnumerable<StationCountDTO> GetDeparturesFromStation(int id);
         IEnumerable<StationCountDTO> GetReturnsForStation(int id);
+        IEnumerable<StationTopDTO> GetTop5DepartureStationsForStation(int id);
+        IEnumerable<StationTopDTO> GetTop5ReturnStationsForStation(int id);
     }
 }
 

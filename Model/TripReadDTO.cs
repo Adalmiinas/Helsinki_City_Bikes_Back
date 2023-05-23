@@ -6,7 +6,7 @@ namespace HelsinkiBikes.Model
 {
     public readonly record struct TripReadDTO(int id, DateTime Departure, DateTime Return,
         int DepartureStationId, string DepartureStationName, int ReturnStationId,
-        string ReturnStationName, float Distance, int Duration);
+        string ReturnStationName, int Distance, int Duration);
 
 }
 

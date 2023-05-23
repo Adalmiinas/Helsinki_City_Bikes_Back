@@ -15,7 +15,7 @@ namespace HelsinkiBikes.Repository
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
-                var sql = "SELECT * FROM Trips ORDER BY id OFFSET @start ROWS FETCH NEXT 100 ROWS ONLY;";
+                var sql = "SELECT * FROM Trips ORDER BY id OFFSET @start ROWS FETCH NEXT 10 ROWS ONLY;";
                 using var command = new SqlCommand(sql, conn);
                 int startingpoint = (page - 1) * 10;
                 command.Parameters.AddWithValue("@start", startingpoint);
@@ -61,6 +61,27 @@ namespace HelsinkiBikes.Repository
                         reader.GetString(6),
                         reader.GetInt32(7),
                         reader.GetInt32(8)
+                        );
+                }
+            }
+        }
+
+        public IEnumerable<TripCountDTO> GetCountOfTrips()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var sql = "SELECT count(*) FROM Trips;";
+                using var command = new SqlCommand(sql, conn);
+
+
+                using SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    yield return new TripCountDTO(
+                        reader.GetInt32(0)
+
                         );
                 }
             }

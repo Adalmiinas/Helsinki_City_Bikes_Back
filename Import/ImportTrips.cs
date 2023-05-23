@@ -34,18 +34,26 @@ namespace HelsinkiBikes.Import
                         IEnumerable<TripDTO> trips = csv.GetRecords<TripDTO>().ToList();
                         foreach (TripDTO trip in trips)
                         {
+                            if (trip.Covereddistance != null || trip.Covereddistance is float)
+                            {
+                                if (trip.Covereddistance > 9 && trip.Duration > 9)
+                                {
 
-                            var sql = "INSERT INTO Trips (DepartureTime, ReturnTime, DepartureStationId, DepartureStationName, ReturnStationId, ReturnStationName,Distance,Duration) VALUES(@Departure, @Return, @DepartureStationId, @DepartureStationName, @ReturnStationId, @ReturnStationName, @Distance, @Duration)";
-                            using var command = new SqlCommand(sql, conn);
-                            command.Parameters.AddWithValue("@Departure", trip.Departure);
-                            command.Parameters.AddWithValue("@Return", trip.Return);
-                            command.Parameters.AddWithValue("@DepartureStationId", trip.Departurestationid);
-                            command.Parameters.AddWithValue("@DepartureStationName", trip.Departurestationname);
-                            command.Parameters.AddWithValue("@ReturnStationId", trip.Returnstationid);
-                            command.Parameters.AddWithValue("@ReturnStationName", trip.Returnstationname);
-                            command.Parameters.AddWithValue("@Distance", (int)trip.Covereddistance);
-                            command.Parameters.AddWithValue("@Duration", trip.Duration);
-                            command.ExecuteNonQuery();
+
+
+                                    var sql = "INSERT INTO Trips (DepartureTime, ReturnTime, DepartureStationId, DepartureStationName, ReturnStationId, ReturnStationName,Distance,Duration) VALUES(@Departure, @Return, @DepartureStationId, @DepartureStationName, @ReturnStationId, @ReturnStationName, @Distance, @Duration)";
+                                    using var command = new SqlCommand(sql, conn);
+                                    command.Parameters.AddWithValue("@Departure", trip.Departure);
+                                    command.Parameters.AddWithValue("@Return", trip.Return);
+                                    command.Parameters.AddWithValue("@DepartureStationId", trip.Departurestationid);
+                                    command.Parameters.AddWithValue("@DepartureStationName", trip.Departurestationname);
+                                    command.Parameters.AddWithValue("@ReturnStationId", trip.Returnstationid);
+                                    command.Parameters.AddWithValue("@ReturnStationName", trip.Returnstationname);
+                                    command.Parameters.AddWithValue("@Distance", (int)trip.Covereddistance);
+                                    command.Parameters.AddWithValue("@Duration", trip.Duration);
+                                    command.ExecuteNonQuery();
+                                }
+                            }
                         }
 
                     }

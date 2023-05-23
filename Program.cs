@@ -62,12 +62,13 @@ namespace HelsinkiBikes
 
 
             var importTrips = new ImportTrips();
+            var importStations = new ImportStations();
+
+            /* UNCOMMENT THESE WHEN YOU RUN THE FIRST TIME. AND COMMENT AGAIN AFTER*/
 
             //importTrips.seeding("data/2021-05.csv");
             //importTrips.seeding("data/2021-06.csv");
             //importTrips.seeding("data/2021-07.csv");
-
-            var importStations = new ImportStations();
 
             //importStations.seeding("data/Helsingin_ja_Espoon_kaupunkipy%C3%B6r%C3%A4asemat_avoin.csv");
 
