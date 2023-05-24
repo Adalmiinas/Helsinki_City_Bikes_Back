@@ -11,6 +11,8 @@ namespace HelsinkiBikes.Repository
         IEnumerable<StationCountDTO> GetReturnsForStation(int id);
         IEnumerable<StationTopDTO> GetTop5DepartureStationsForStation(int id);
         IEnumerable<StationTopDTO> GetTop5ReturnStationsForStation(int id);
+        IEnumerable<StationCountDTO> GetAvgDistanceStartingFrom(int id);
+        IEnumerable<StationCountDTO> GetAvgDistanceEndingTo(int id);
     }
 }
 

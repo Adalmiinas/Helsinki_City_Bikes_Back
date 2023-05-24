@@ -122,8 +122,8 @@ namespace HelsinkiBikes.Repository
                 while (reader.Read())
                 {
                     yield return new StationTopDTO(
-                        reader.GetString(11),
-                        reader.GetInt32(0)
+                        reader.GetString(0),
+                        reader.GetInt32(1)
                         );
                 }
             }
@@ -141,8 +141,46 @@ namespace HelsinkiBikes.Repository
                 while (reader.Read())
                 {
                     yield return new StationTopDTO(
-                        reader.GetString(11),
+                        reader.GetString(0),
+                        reader.GetInt32(1)
+                        );
+                }
+            }
+        }
+
+        public IEnumerable<StationCountDTO> GetAvgDistanceStartingFrom(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var sql = "SELECT  AVG(Distance) FROM Trips WHERE ReturnStationId = @id;";
+                using var command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@id", id);
+                using SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    yield return new StationCountDTO(
                         reader.GetInt32(0)
+                        );
+                }
+            }
+        }
+
+        public IEnumerable<StationCountDTO> GetAvgDistanceEndingTo(int id)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                var sql = "SELECT  AVG(Distance) FROM Trips WHERE DepartureStationId = @id; ";
+                using var command = new SqlCommand(sql, conn);
+                command.Parameters.AddWithValue("@id", id);
+                using SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    yield return new StationCountDTO(
+                      reader.GetInt32(0)
                         );
                 }
             }

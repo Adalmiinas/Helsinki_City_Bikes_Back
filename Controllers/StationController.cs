@@ -18,7 +18,7 @@ namespace HelsinkiBikes.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetAllStations")]
+        [HttpGet("Station")]
         [ProducesResponseType(typeof(List<StationReadDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public ActionResult<List<StationReadDTO>> GetAllStations()
@@ -34,7 +34,7 @@ namespace HelsinkiBikes.Controllers
 
         }
 
-        [HttpGet("GetStationById")]
+        [HttpGet("Station/id")]
         [ProducesResponseType(typeof(List<StationReadDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public ActionResult<List<StationReadDTO>> GetStationsById(int id)
@@ -51,7 +51,7 @@ namespace HelsinkiBikes.Controllers
         }
 
 
-        [HttpGet("GetDeparturesFromStation")]
+        [HttpGet("Station/Departures")]
         [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public ActionResult<List<StationCountDTO>> GetDeparturesFromStation(int id)
@@ -68,7 +68,7 @@ namespace HelsinkiBikes.Controllers
         }
 
 
-        [HttpGet("GetReturnsForStation")]
+        [HttpGet("Station/Returns")]
         [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public ActionResult<List<StationCountDTO>> GetReturnsForStation(int id)
@@ -76,6 +76,72 @@ namespace HelsinkiBikes.Controllers
             try
             {
                 return Ok(_mapper.Map<List<StationCountDTO>>(_stationRepository.GetReturnsForStation(id)));
+            }
+            catch (System.Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+
+        }
+
+        [HttpGet("Station/Top5ReturnStations")]
+        [ProducesResponseType(typeof(List<StationTopDTO>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public ActionResult<List<StationTopDTO>> GetTop5ReturnStationsForStation(int id)
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<StationTopDTO>>(_stationRepository.GetTop5ReturnStationsForStation(id)));
+            }
+            catch (System.Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+
+        }
+
+
+        [HttpGet("Station/Top5DepartureStations")]
+        [ProducesResponseType(typeof(List<StationTopDTO>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public ActionResult<List<StationTopDTO>> GetTop5DepartureStationsForStation(int id)
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<StationTopDTO>>(_stationRepository.GetTop5DepartureStationsForStation(id)));
+            }
+            catch (System.Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+
+        }
+
+        [HttpGet("Station/GetAvgDistanceStartingFrom")]
+        [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public ActionResult<List<StationCountDTO>> GetAvgDistanceStartingFrom(int id)
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<StationCountDTO>>(_stationRepository.GetAvgDistanceStartingFrom(id)));
+            }
+            catch (System.Exception ex)
+            {
+                return new BadRequestObjectResult(ex.Message);
+            }
+
+        }
+
+
+        [HttpGet("Station/GetAvgDistanceEndingTo")]
+        [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
+        [ProducesResponseType(typeof(BadRequestResult), 400)]
+        public ActionResult<List<StationCountDTO>> GetAvgDistanceEndingTo(int id)
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<StationCountDTO>>(_stationRepository.GetAvgDistanceEndingTo(id)));
             }
             catch (System.Exception ex)
             {
