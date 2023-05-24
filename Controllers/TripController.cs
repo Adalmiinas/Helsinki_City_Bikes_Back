@@ -17,7 +17,7 @@ namespace HelsinkiBikes.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("GetOnePage")]
+        [HttpGet("Trip/onePage")]
         [ProducesResponseType(typeof(List<TripReadDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public ActionResult<List<TripReadDTO>> GetOnePageOfTrips(int page)
@@ -33,7 +33,7 @@ namespace HelsinkiBikes.Controllers
 
         }
 
-        [HttpGet("GetAllTrips")]
+        [HttpGet("Trip")]
         [ProducesResponseType(typeof(List<TripReadDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public ActionResult<List<TripReadDTO>> GetAllTrips()
@@ -49,7 +49,7 @@ namespace HelsinkiBikes.Controllers
 
         }
 
-        [HttpGet("Trip/GetCountOfTrips")]
+        [HttpGet("Trip/Count")]
         [ProducesResponseType(typeof(List<TripCountDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
         public ActionResult<List<TripCountDTO>> GetCountOfTrips()

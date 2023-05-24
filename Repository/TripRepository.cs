@@ -81,7 +81,6 @@ namespace HelsinkiBikes.Repository
                 {
                     yield return new TripCountDTO(
                         reader.GetInt32(0)
-
                         );
                 }
             }

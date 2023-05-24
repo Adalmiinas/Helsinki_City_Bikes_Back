@@ -34,24 +34,30 @@ namespace HelsinkiBikes.Import
                         IEnumerable<TripDTO> trips = csv.GetRecords<TripDTO>().ToList();
                         foreach (TripDTO trip in trips)
                         {
-                            if (trip.Covereddistance != null || trip.Covereddistance is float)
+                            if (trip.Departure != null && trip.Return != null && trip.Departurestationid != null &&
+                                trip.Departurestationname != null && trip.Returnstationid != null && trip.Returnstationname != null
+                                && trip.Covereddistance != null && trip.Duration != null)
                             {
-                                if (trip.Covereddistance > 9 && trip.Duration > 9)
+                                if (trip.Departure is DateTime && trip.Return is DateTime && trip.Departurestationid is int &&
+                                    trip.Departurestationname is string && trip.Returnstationid is int && trip.Returnstationname is string
+                                    && trip.Covereddistance is float && trip.Duration is int)
                                 {
 
+                                    if (trip.Covereddistance > 9 && trip.Duration > 9)
+                                    {
 
-
-                                    var sql = "INSERT INTO Trips (DepartureTime, ReturnTime, DepartureStationId, DepartureStationName, ReturnStationId, ReturnStationName,Distance,Duration) VALUES(@Departure, @Return, @DepartureStationId, @DepartureStationName, @ReturnStationId, @ReturnStationName, @Distance, @Duration)";
-                                    using var command = new SqlCommand(sql, conn);
-                                    command.Parameters.AddWithValue("@Departure", trip.Departure);
-                                    command.Parameters.AddWithValue("@Return", trip.Return);
-                                    command.Parameters.AddWithValue("@DepartureStationId", trip.Departurestationid);
-                                    command.Parameters.AddWithValue("@DepartureStationName", trip.Departurestationname);
-                                    command.Parameters.AddWithValue("@ReturnStationId", trip.Returnstationid);
-                                    command.Parameters.AddWithValue("@ReturnStationName", trip.Returnstationname);
-                                    command.Parameters.AddWithValue("@Distance", (int)trip.Covereddistance);
-                                    command.Parameters.AddWithValue("@Duration", trip.Duration);
-                                    command.ExecuteNonQuery();
+                                        var sql = "INSERT INTO Trips (DepartureTime, ReturnTime, DepartureStationId, DepartureStationName, ReturnStationId, ReturnStationName,Distance,Duration) VALUES(@Departure, @Return, @DepartureStationId, @DepartureStationName, @ReturnStationId, @ReturnStationName, @Distance, @Duration)";
+                                        using var command = new SqlCommand(sql, conn);
+                                        command.Parameters.AddWithValue("@Departure", trip.Departure);
+                                        command.Parameters.AddWithValue("@Return", trip.Return);
+                                        command.Parameters.AddWithValue("@DepartureStationId", trip.Departurestationid);
+                                        command.Parameters.AddWithValue("@DepartureStationName", trip.Departurestationname);
+                                        command.Parameters.AddWithValue("@ReturnStationId", trip.Returnstationid);
+                                        command.Parameters.AddWithValue("@ReturnStationName", trip.Returnstationname);
+                                        command.Parameters.AddWithValue("@Distance", (int)trip.Covereddistance);
+                                        command.Parameters.AddWithValue("@Duration", trip.Duration);
+                                        command.ExecuteNonQuery();
+                                    }
                                 }
                             }
                         }
