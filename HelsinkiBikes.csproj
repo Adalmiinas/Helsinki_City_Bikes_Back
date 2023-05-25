@@ -32,6 +32,8 @@
     <None Remove="Repository\" />
     <None Remove="DataContext\" />
     <None Remove="Model\StationCount.js" />
+    <None Remove="Model\Trip\" />
+    <None Remove="Model\Station\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
@@ -39,9 +41,16 @@
     <Folder Include="Model\" />
     <Folder Include="Repository\" />
     <Folder Include="DataContext\" />
+    <Folder Include="Model\Trip\" />
+    <Folder Include="Model\Station\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Model\TripCountDTO.cs">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Compile>
+    <Compile Update="Model\Trip\TripCountDTO.cs">
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
