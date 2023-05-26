@@ -13,13 +13,17 @@ namespace HelsinkiBikes.Import
     {
         public string connectionString = System.Configuration.ConfigurationManager.ConnectionStrings["helsinkiBikes"].ConnectionString;
 
+        //changing the header into a more simplifyed version.
         public CsvConfiguration config = new CsvConfiguration(CultureInfo.InvariantCulture)
         {
             PrepareHeaderForMatch = args => args.Header.Replace(" ", "").Replace("(m)", "").Replace("(sec.)", ""),
 
         };
 
-
+        /// <summary>
+        /// Importing the trip data to the database
+        /// </summary>
+        /// <param name="data"> csv file data</param>
         public void seeding(string data)
         {
 
@@ -36,18 +40,20 @@ namespace HelsinkiBikes.Import
                         var check = new DuplicateCheck();
                         foreach (TripDTO trip in trips)
                         {
-
+                            //Checks if the row already exists in the database
                             if (!check.CheckIfTripRowExist(trip))
                             {
+                                //Checks that non of the colums are null
                                 if (trip.Departure != null && trip.Return != null && trip.Departurestationid != null &&
                                 trip.Departurestationname != null && trip.Returnstationid != null && trip.Returnstationname != null
                                 && trip.Covereddistance != null && trip.Duration != null)
                                 {
+                                    //Checks that the data is correct form
                                     if (trip.Departure is DateTime && trip.Return is DateTime && trip.Departurestationid is int &&
                                         trip.Departurestationname is string && trip.Returnstationid is int && trip.Returnstationname is string
                                         && trip.Covereddistance is float && trip.Duration is int)
                                     {
-
+                                        //checks that the distance and duration are more than 9
                                         if (trip.Covereddistance > 9 && trip.Duration > 9)
                                         {
 

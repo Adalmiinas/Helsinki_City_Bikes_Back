@@ -10,14 +10,10 @@ namespace HelsinkiBikes.DataContext
         public DbSet<Trip> Trips { get; set; }
         public DbSet<Station> Stations { get; set; }
 
-
-
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(connectionString);
         }
-
-
     }
 
 }

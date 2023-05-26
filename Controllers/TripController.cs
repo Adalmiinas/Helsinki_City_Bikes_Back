@@ -6,6 +6,9 @@ using AutoMapper;
 
 namespace HelsinkiBikes.Controllers
 {
+    /// <summary>
+    /// Controller for the trips
+    /// </summary>
     public class TripController : ControllerBase
     {
         private readonly ITripRepository _tripRepository;
@@ -17,6 +20,11 @@ namespace HelsinkiBikes.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get one page of trips, which is ten trips at a time
+        /// </summary>
+        /// <param name="page"> page number</param>
+        /// <returns><List<TripReadDTO></returns>
         [HttpGet("Trip/onePage")]
         [ProducesResponseType(typeof(List<TripReadDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -33,6 +41,10 @@ namespace HelsinkiBikes.Controllers
 
         }
 
+        /// <summary>
+        /// Get all trips 
+        /// </summary>
+        /// <returns> ActionResult<List<TripReadDTO>></returns>
         [HttpGet("Trip")]
         [ProducesResponseType(typeof(List<TripReadDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -49,6 +61,10 @@ namespace HelsinkiBikes.Controllers
 
         }
 
+        /// <summary>
+        /// Get how many trips there are in the database
+        /// </summary>
+        /// <returns> ActionResult<List<TripCountDTO>> </returns>
         [HttpGet("Trip/Count")]
         [ProducesResponseType(typeof(List<TripCountDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]

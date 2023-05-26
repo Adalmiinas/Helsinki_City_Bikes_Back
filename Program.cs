@@ -17,7 +17,6 @@ namespace HelsinkiBikes
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -58,6 +57,7 @@ namespace HelsinkiBikes
             app.Run();
 
 
+            //Importing the data to the database
             var importTrips = new ImportTrips();
             var importStations = new ImportStations();
 

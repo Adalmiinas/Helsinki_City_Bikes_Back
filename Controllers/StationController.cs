@@ -18,6 +18,10 @@ namespace HelsinkiBikes.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Get all stations
+        /// </summary>
+        /// <returns> ActionResult<List<StationReadDTO>> </returns>
         [HttpGet("Station")]
         [ProducesResponseType(typeof(List<StationReadDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -34,6 +38,11 @@ namespace HelsinkiBikes.Controllers
 
         }
 
+        /// <summary>
+        /// Get station by its id
+        /// </summary>
+        /// <param name="id">station id</param>
+        /// <returns> ActionResult<List<StationReadDTO>></returns>
         [HttpGet("Station/id")]
         [ProducesResponseType(typeof(List<StationReadDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -51,6 +60,11 @@ namespace HelsinkiBikes.Controllers
         }
 
 
+        /// <summary>
+        /// Get the amount of departures from a station
+        /// </summary>
+        /// <param name="id"> station id </param>
+        /// <returns> ActionResult<List<StationCountDTO>> </returns>
         [HttpGet("Station/Departures")]
         [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -67,7 +81,11 @@ namespace HelsinkiBikes.Controllers
 
         }
 
-
+        /// <summary>
+        /// Get the amount of returns for a station
+        /// </summary>
+        /// <param name="id"> station id </param>
+        /// <returns>  ActionResult<List<StationCountDTO>></returns>
         [HttpGet("Station/Returns")]
         [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -83,7 +101,11 @@ namespace HelsinkiBikes.Controllers
             }
 
         }
-
+        /// <summary>
+        /// Get the top five stations where people starting this station returns to.
+        /// </summary>
+        /// <param name="id"> station id </param>
+        /// <returns> ActionResult<List<StationTopDTO>>  </returns>
         [HttpGet("Station/Top5ReturnStations")]
         [ProducesResponseType(typeof(List<StationTopDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -100,7 +122,11 @@ namespace HelsinkiBikes.Controllers
 
         }
 
-
+        /// <summary>
+        /// Get the top five stations where people ending at this station departed from.
+        /// </summary>
+        /// <param name="id"> station id </param>
+        /// <returns>ActionResult<List<StationTopDTO>></returns>
         [HttpGet("Station/Top5DepartureStations")]
         [ProducesResponseType(typeof(List<StationTopDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -117,6 +143,12 @@ namespace HelsinkiBikes.Controllers
 
         }
 
+
+        /// <summary>
+        /// Get the average distance when starting from this station
+        /// </summary>
+        /// <param name="id"> station id </param>
+        /// <returns> ActionResult<List<StationCountDTO>>  </returns>
         [HttpGet("Station/GetAvgDistanceStartingFrom")]
         [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]
@@ -133,7 +165,11 @@ namespace HelsinkiBikes.Controllers
 
         }
 
-
+        /// <summary>
+        /// Get the average distance when ending at this station
+        /// </summary>
+        /// <param name="id"> station id </param>
+        /// <returns> ActionResult<List<StationCountDTO>>  </returns>
         [HttpGet("Station/GetAvgDistanceEndingTo")]
         [ProducesResponseType(typeof(List<StationCountDTO>), 200)]
         [ProducesResponseType(typeof(BadRequestResult), 400)]

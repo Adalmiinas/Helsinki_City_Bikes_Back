@@ -16,10 +16,12 @@ namespace HelsinkiBikes.Import
         {
         };
 
-
+        /// <summary>
+        /// Importing the station data to the database
+        /// </summary>
+        /// <param name="data"> csv data file</param>
         public void seeding(string data)
         {
-
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
@@ -33,7 +35,7 @@ namespace HelsinkiBikes.Import
                         var check = new DuplicateCheck();
                         foreach (StationDTO station in stations)
                         {
-
+                            //Checks if the station already exists in the database
                             if (!check.CheckIfStationRowExist(station))
                             {
                                 var sql = "INSERT INTO Stations (StationId, Name, SwedishName, EnglishName, Address, SwedishAddress,City,SwedishCityName, Operator, Capacity, xAxel, yAxel) " +
