@@ -1,4 +1,4 @@
-# Helsinki Bikes - Backend
+# Helsinki Bikes - Frontend
 
 ## Table of Contents
 1. [Introduction](#intro)
@@ -27,8 +27,15 @@ The Frontend can be found here: https://github.com/Adalmiinas/Helsinki_City_Bike
 
 ## 4. Usage
 
-Download Visual Studio and SQL Service Management Studio (SSMS). Find your information for the connection string.
-dotnet watch run to download all the nuget packages
+As an editor, you can use Visual Studio Code or Visual Studio.
+If you are using visual studio download packages ASP.NET and web development, .NET desktop development and
+Data storage and processing with it. 
+
+In order to run dotnet commands you need .NET SDK for you machine. 
+
+For running SQL you need to download SQL server express with basic configuration.This will also provide you your connection string. Link: https://www.microsoft.com/en-us/sql-server/sql-server-downloads  
+
+Optional: If you want to view the tables and make queries with the data, download SQL Service Management Studio (SSMS). 
 
 Change your connection string in app.config file. 
 
@@ -40,26 +47,31 @@ Change your connection string in app.config file.
 	</connectionStrings>
 </configuration>
 ```
+In the terminal run:
+### `dotnet watch run`
+and terminate it with CTRL + C. This runs all the nuget packages needed for  the project.
 
-Uncomment the seeding commands from Program.cs file.
+Add data sets to the Data folder from: https://github.com/solita/dev-academy-2023-exercise
 
-Windows: Open package Management console in Visual Studio and run: 
-### `update-database` 
+In the terminal download dotnet tools with the command: 
+### `dotnet tool install --global dotnet-ef`
 
-Mac: Open terminal and run (you might have to configure entity framework commands): 
-### `dotnet ef database update` 
+Then write in the terminal:
+### `dotnet ef database update`
+This creates the tables. 
 
-After it has created the tables run 
+Now that the tables are done, run again
 ### `dotnet watch run` 
 and terminate it with crtl + C. While it's shutting down it imports the data. Because of the size of the files this might take several minutes. You can discontinue it early with ctrl + C again.
 
-Recomment the seeding commands before running again with:
+You can use SSMS to check if the tables have been created and the data has been added. 
+
+Now running again with:
 ### `dotnet watch run` 
 
 While the program is running you can see the api at: https://localhost:7183/index.html or https://localhost:7183/swagger/index.html
 
 While both backend and frontend are running you can view the application at: http://localhost:3000/
-
 
 ## 5. Authors
 [@Adalmiina](https://github.com/Adalmiinas)
