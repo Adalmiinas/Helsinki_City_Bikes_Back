@@ -1,4 +1,4 @@
-# Helsinki Bikes - Frontend
+# Helsinki Bikes - Backend
 
 ## Table of Contents
 1. [Introduction](#intro)
@@ -27,7 +27,8 @@ The Frontend can be found here: https://github.com/Adalmiinas/Helsinki_City_Bike
 
 ## 4. Usage
 
-Download Visual Studio and SQL Service Management Studio (SSMS). Find your information for the connection string. 
+Download Visual Studio and SQL Service Management Studio (SSMS). Find your information for the connection string.
+dotnet watch run to download all the nuget packages
 
 Change your connection string in app.config file. 
 
@@ -49,13 +50,13 @@ Mac: Open terminal and run (you might have to configure entity framework command
 ### `dotnet ef database update` 
 
 After it has created the tables run 
-### `dotnet run` 
+### `dotnet watch run` 
 and terminate it with crtl + C. While it's shutting down it imports the data. Because of the size of the files this might take several minutes. You can discontinue it early with ctrl + C again.
 
 Recomment the seeding commands before running again with:
-### `dotnet run` 
+### `dotnet watch run` 
 
-While the program is running you can see the api at: https://localhost:7183/index.html
+While the program is running you can see the api at: https://localhost:7183/index.html or https://localhost:7183/swagger/index.html
 
 While both backend and frontend are running you can view the application at: http://localhost:3000/
 

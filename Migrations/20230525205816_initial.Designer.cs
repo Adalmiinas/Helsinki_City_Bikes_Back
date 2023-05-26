@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HelsinkiBikes.Migrations
 {
     [DbContext(typeof(DataContexts))]
-    [Migration("20230523105339_initial")]
+    [Migration("20230525205816_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
